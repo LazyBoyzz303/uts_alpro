@@ -4,40 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Tagihan Air Rumah Tangga | Proyek UTS SSI1144</title>
-<style>
-:root{--bg:#f6fafb;--surface:#fff;--text:#16262c;--muted:#4f6670;--line:#d3e1e6;--accent:#0b6f8a;--accent-soft:#e1f1f5;--code-bg:#102a33;--code-text:#e4f2f6}
-@media (prefers-color-scheme:dark){:root{--bg:#0e1a1f;--surface:#15252c;--text:#e4eef1;--muted:#9fb5bd;--line:#26404a;--accent:#5fc3de;--accent-soft:#183540;--code-bg:#0a1418;--code-text:#d6eaf0}}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:70px}
-body{margin:0;background:var(--bg);color:var(--text);font:16px/1.65 Georgia,"Times New Roman",serif}
-header.top{position:sticky;top:0;z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
-nav{display:flex;gap:4px;overflow-x:auto;padding:8px 16px;max-width:1000px;margin:auto;font:14px system-ui,sans-serif}
-nav a{white-space:nowrap;padding:6px 12px;border-radius:6px;color:var(--muted);text-decoration:none}
-nav a:hover,nav a:focus-visible{background:var(--accent-soft);color:var(--accent);outline:none}
-main{max-width:1000px;margin:auto;padding:0 16px 80px}
-.hero{padding:56px 0 32px;border-bottom:3px solid var(--accent)}
-.hero p.course{font:14px system-ui,sans-serif;color:var(--muted);margin:0 0 8px}
-.hero h1{font-size:clamp(2rem,6vw,3.4rem);line-height:1.1;margin:0 0 12px}
-.hero .case{font-size:1.2rem;color:var(--accent);margin:0 0 24px}
-section{padding-top:48px}
-h2{font-size:1.75rem;margin:0 0 16px;padding-bottom:8px;border-bottom:1px solid var(--line)}
-h3{font-size:1.2rem;margin:32px 0 8px}
-h4{font:600 1rem system-ui,sans-serif;margin:20px 0 6px}
-p,li{max-width:75ch}
-.table-wrap{overflow-x:auto;margin:12px 0}
-table{border-collapse:collapse;width:100%;font:14px/1.5 system-ui,sans-serif;background:var(--surface)}
-th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
-th{background:var(--accent-soft);color:var(--text)}
-pre{background:var(--code-bg);color:var(--code-text);padding:16px;border-radius:6px;overflow-x:auto;font:13px/1.55 ui-monospace,Consolas,monospace;margin:12px 0}
-code{font-family:ui-monospace,Consolas,monospace;font-size:.9em}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:16px 20px;margin:12px 0}
-.meta{width:auto;min-width:min(100%,520px)}
-.todo{background:#fff3c4;color:#5c4400;padding:0 4px;border-radius:3px}
-.mermaid{background:#fff;border:1px solid var(--line);border-radius:6px;padding:16px;overflow-x:auto;text-align:center}
-.shot{border:2px dashed var(--line);border-radius:6px;padding:20px;color:var(--muted);font:14px system-ui,sans-serif;text-align:center}
-a{color:var(--accent)}
-footer{border-top:1px solid var(--line);padding:24px 16px;text-align:center;color:var(--muted);font:14px system-ui,sans-serif}
-</style>
 </head>
 <body>
 <header class="top"><nav>
