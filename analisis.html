@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Analisis Masalah | Tagihan Air Rumah Tangga</title>
+<style>
+:root{--bg:#f6fafb;--surface:#fff;--text:#16262c;--muted:#4f6670;--line:#d3e1e6;--accent:#0b6f8a;--accent-soft:#e1f1f5}
+@media (prefers-color-scheme:dark){:root{--bg:#0e1a1f;--surface:#15252c;--text:#e4eef1;--muted:#9fb5bd;--line:#26404a;--accent:#5fc3de;--accent-soft:#183540}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.65 Georgia,"Times New Roman",serif}
+main{max-width:1000px;margin:auto;padding:32px 16px 80px}
+.back{font:14px system-ui,sans-serif}
+h1{font-size:clamp(1.8rem,5vw,2.6rem);line-height:1.15;margin:16px 0 24px;padding-bottom:12px;border-bottom:3px solid var(--accent)}
+h2{font-size:1.4rem;margin:36px 0 8px}
+p,li{max-width:75ch}
+.table-wrap{overflow-x:auto;margin:12px 0}
+table{border-collapse:collapse;width:100%;font:14px/1.5 system-ui,sans-serif;background:var(--surface)}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--accent-soft)}
+code{font-family:ui-monospace,Consolas,monospace;font-size:.9em}
+.todo{background:#fff3c4;color:#5c4400;padding:0 4px;border-radius:3px}
+.note{background:var(--accent-soft);border-left:4px solid var(--accent);padding:12px 16px;border-radius:0 6px 6px 0;margin:16px 0}
+a{color:var(--accent)}
+</style>
+</head>
+<body>
+<main>
+<a class="back" href="index.html">&larr; Kembali ke beranda</a>
+<h1>Analisis Masalah</h1>
+
+<h2>Latar belakang dan rumusan masalah</h2>
+<p>Perusahaan penyedia air perlu menghitung tagihan tiap pelanggan secara adil. Pemakaian yang lebih banyak dikenai tarif per m³ yang lebih tinggi, sehingga perhitungannya tidak boleh sekadar mengalikan seluruh pemakaian dengan satu tarif.</p>
+<p><strong>Rumusan masalah:</strong> bagaimana menghitung tagihan dari selisih meter dengan tarif bertingkat, menambahkan biaya administrasi dan denda, serta merekap data banyak pelanggan dalam satu program?</p>
+
+<h2>Tujuan dan pengguna program</h2>
+<p>Tujuannya membuat program console yang menghitung tagihan dengan benar, menolak input tidak valid tanpa berhenti, dan menampilkan rincian serta rekapitulasi. Penggunanya adalah petugas loket atau administrasi perusahaan air.</p>
+
+<h2>Ketentuan dan batasan</h2>
+<ul>
+<li>Tarif: 0-10 m³ Rp2.500; 11-20 m³ Rp4.000; di atas 20 m³ Rp6.000 (progresif).</li>
+<li>Biaya administrasi Rp7.500; denda keterlambatan 5% dari biaya pemakaian.</li>
+<li>Meter akhir tidak boleh lebih kecil dari meter awal; meter tidak boleh negatif.</li>
+<li>Memakai variabel, konstanta, operator, percabangan, dan perulangan; tanpa array, function, class, atau library eksternal.</li>
+<li>Program berjalan di console dan menyediakan pilihan mengulang atau mengakhiri proses.</li>
+</ul>
+<div class="note"><strong>Asumsi:</strong> meter dibaca dalam bilangan bulat (m³); denda dihitung dari biaya pemakaian saja, tanpa administrasi.</div>
+
+<h2>Input-Process-Output</h2>
+<div class="table-wrap"><table>
+<tr><th>Input</th><th>Proses</th><th>Output</th></tr>
+<tr>
+<td>Nomor dan nama pelanggan<br>Meter awal, meter akhir<br>Status terlambat (y/t)<br>Pilihan lanjut (y/t)</td>
+<td>Validasi input<br>Pemakaian = meter akhir - meter awal<br>Biaya per tingkat tarif (percabangan)<br>Denda dan total tagihan<br>Perulangan per pelanggan<br>Akumulasi rekapitulasi</td>
+<td>Rincian tagihan per pelanggan<br>Jumlah pelanggan dan pelanggan terlambat<br>Total dan rata-rata pemakaian<br>Jumlah pelanggan di atas 20 m³<br>Total administrasi, denda, pendapatan<br>Pemakaian tertinggi</td>
+</tr>
+</table></div>
+</main>
+</body>
+</html>
