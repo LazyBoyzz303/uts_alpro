@@ -1,0 +1,38 @@
+ALGORITMA TagihanAir
+KAMUS: (variabel sesuai tabel di atas)
+
+MULAI
+  inisialisasi semua penghitung dan total = 0
+  pemakaianTertinggi ← 0; pelangganTertinggi ← "-"
+  lanjut ← 'y'
+
+  SELAMA lanjut = 'y' ATAU 'Y' LAKUKAN
+     // ===== MODUL A =====
+     BACA nomorPelanggan, namaPelanggan
+     ULANGI
+        BACA meterAwal
+        JIKA input bukan angka ATAU meterAwal < 0 MAKA TAMPILKAN "tidak valid"
+     SAMPAI meterAwal valid
+     ULANGI
+        BACA meterAkhir
+        JIKA input bukan angka ATAU meterAkhir < meterAwal MAKA TAMPILKAN "tidak valid"
+     SAMPAI meterAkhir valid
+     ULANGI BACA terlambat SAMPAI terlambat ∈ {y,Y,t,T}
+
+     pemakaian ← meterAkhir − meterAwal
+     biayaTingkat1 ← 0; biayaTingkat2 ← 0; biayaTingkat3 ← 0
+     JIKA pemakaian <= BATAS_1 MAKA
+        biayaTingkat1 ← pemakaian × TARIF_1
+     LAIN JIKA pemakaian <= BATAS_2 MAKA
+        biayaTingkat1 ← BATAS_1 × TARIF_1
+        biayaTingkat2 ← (pemakaian − BATAS_1) × TARIF_2
+     LAIN
+        biayaTingkat1 ← BATAS_1 × TARIF_1
+        biayaTingkat2 ← (BATAS_2 − BATAS_1) × TARIF_2
+        biayaTingkat3 ← (pemakaian − BATAS_2) × TARIF_3
+     biayaPemakaian ← biayaTingkat1 + biayaTingkat2 + biayaTingkat3
+
+     JIKA terlambat = 'y' ATAU 'Y' MAKA denda ← biayaPemakaian × PERSEN_DENDA / 100
+     LAIN denda ← 0
+     totalTagihan ← biayaPemakaian + BIAYA_ADMIN + denda
+     TAMPILKAN rincian tagihan
