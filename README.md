@@ -13,7 +13,7 @@
 
 <!-- ============ 1. BERANDA ============ -->
 <section id="beranda" class="hero">
-<p class="course">SSI1144 | Algoritma dan Pengantar Pemrograman | Proyek UTS: From Problem to Program</p>
+<p class="course">SSI1144 | Algoritma dan Pengantar Pemrograman | Proyek UTS</p>
 <h1>Sistem Perhitungan Tagihan Air Rumah Tangga</h1>
 <p class="case">Studi Kasus 05, Kelompok <span class="todo">nomor kelompok 5</span></p>
 <div class="table-wrap"><table class="meta">
