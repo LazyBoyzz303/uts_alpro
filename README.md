@@ -125,3 +125,40 @@ footer{border-top:1px solid var(--line);padding:24px 16px;text-align:center;colo
    totalTagihan &larr; biayaPemakaian + BIAYA_ADMIN + denda
    TAMPILKAN rincian tagihan
 AKHIR SELAMA</pre>
+<h3>Flowchart</h3>
+<pre class="mermaid">
+flowchart TD
+  A([Mulai]) --> B[/Input nomor, nama/]
+  B --> C[/Input meter awal/]
+  C --> D{Angka dan >= 0?}
+  D -- Tidak --> C
+  D -- Ya --> E[/Input meter akhir/]
+  E --> F{Angka dan >= meter awal?}
+  F -- Tidak --> E
+  F -- Ya --> G[/Input status terlambat/]
+  G --> H{y atau t?}
+  H -- Tidak --> G
+  H -- Ya --> I[pemakaian = akhir - awal]
+  I --> J{pemakaian <= 10?}
+  J -- Ya --> K[tingkat1 = pemakaian x 2500]
+  J -- Tidak --> L{pemakaian <= 20?}
+  L -- Ya --> M[tingkat1 = 25000<br>tingkat2 = pemakaian-10 x 4000]
+  L -- Tidak --> N[tingkat1 = 25000, tingkat2 = 40000<br>tingkat3 = pemakaian-20 x 6000]
+  K --> O[biayaPemakaian = jumlah tingkat]
+  M --> O
+  N --> O
+  O --> P{Terlambat?}
+  P -- Ya --> Q[denda = 5% x biayaPemakaian]
+  P -- Tidak --> R[denda = 0]
+  Q --> S[total = biaya + admin + denda]
+  R --> S
+  S --> T[/Tampilkan rincian tagihan/]
+  T --> U([Ke Modul B])
+</pre>
+<h3>Source code dan penjelasan</h3>
+<pre data-src="modul_a.cpp">Memuat modul_a.cpp ...</pre>
+<p>Percabangan <code>if / else if / else</code> membuat tarif progresif, sehingga pemakaian 25 m³ dihitung per tingkat. Perulangan <code>do-while</code> menahan program sampai input valid, dan <code>cin.clear()</code> bersama <code>cin.ignore()</code> mencegah program macet saat pengguna mengetik huruf.</p>
+<h3>Hasil eksekusi dan pengujian</h3>
+<div class="shot"><span class="todo">[Tempel tangkapan layar hasil eksekusi Modul A: &lt;img src="gambar/modul_a.png" alt="Hasil Modul A"&gt;]</span></div>
+</section>
+
