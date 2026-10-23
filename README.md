@@ -103,3 +103,25 @@ footer{border-top:1px solid var(--line);padding:24px 16px;text-align:center;colo
 <li>Jika terlambat, denda = 5% x biaya pemakaian; jika tidak, denda = 0.</li>
 <li>Total tagihan = biaya pemakaian + administrasi + denda; tampilkan rincian.</li>
 </ol>
+<h3>Pseudocode</h3>
+<pre>SELAMA lanjut = 'y' LAKUKAN
+   BACA nomorPelanggan, namaPelanggan
+   ULANGI BACA meterAwal SAMPAI angka DAN meterAwal &gt;= 0
+   ULANGI BACA meterAkhir SAMPAI angka DAN meterAkhir &gt;= meterAwal
+   ULANGI BACA terlambat SAMPAI terlambat IN {y,t}
+   pemakaian &larr; meterAkhir - meterAwal
+   JIKA pemakaian &lt;= BATAS_1 MAKA
+      biayaTingkat1 &larr; pemakaian x TARIF_1
+   LAIN JIKA pemakaian &lt;= BATAS_2 MAKA
+      biayaTingkat1 &larr; BATAS_1 x TARIF_1
+      biayaTingkat2 &larr; (pemakaian - BATAS_1) x TARIF_2
+   LAIN
+      biayaTingkat1 &larr; BATAS_1 x TARIF_1
+      biayaTingkat2 &larr; (BATAS_2 - BATAS_1) x TARIF_2
+      biayaTingkat3 &larr; (pemakaian - BATAS_2) x TARIF_3
+   biayaPemakaian &larr; biayaTingkat1 + biayaTingkat2 + biayaTingkat3
+   JIKA terlambat MAKA denda &larr; biayaPemakaian x PERSEN_DENDA / 100
+   LAIN denda &larr; 0
+   totalTagihan &larr; biayaPemakaian + BIAYA_ADMIN + denda
+   TAMPILKAN rincian tagihan
+AKHIR SELAMA</pre>
