@@ -14,8 +14,6 @@
   --accent-soft: #e1f1f5;
   --code-bg: #102a33;
   --code-text: #e4f2f6;
-  --warn-bg: #fff3c4;
-  --warn-text: #5c4400;
 }
 @media (prefers-color-scheme: dark) {
   :root {
@@ -120,7 +118,6 @@ pre {
   color: var(--muted); font: 14px system-ui, sans-serif; text-align: center;
 }
 img { max-width: 100%; height: auto; border-radius: 6px; }
-.todo { background: var(--warn-bg); color: var(--warn-text); padding: 0 4px; border-radius: 3px; }
 
 /* ---------- Footer ---------- */
 footer {
