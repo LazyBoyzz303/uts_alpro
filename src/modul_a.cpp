@@ -23,15 +23,25 @@ int main() {
 
         cout << "\n=== Data Pelanggan Baru ===\n";
         cout << "Nomor pelanggan : ";
-        getline(cin, nomorPelanggan);
+        if (!getline(cin, nomorPelanggan)) {
+            cout << "\nInput berakhir. Program dihentikan.\n";
+            return 0;
+        }
         cout << "Nama pelanggan  : ";
-        getline(cin, namaPelanggan);
+        if (!getline(cin, namaPelanggan)) {
+            cout << "\nInput berakhir. Program dihentikan.\n";
+            return 0;
+        }
 
         // Validasi meter awal (angka dan tidak negatif)
         do {
             cout << "Meter awal      : ";
             cin >> meterAwal;
             if (cin.fail()) {
+                if (cin.eof()) {
+                    cout << "\nInput berakhir. Program dihentikan.\n";
+                    return 0;
+                }
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 meterAwal = -1;
@@ -44,6 +54,10 @@ int main() {
             cout << "Meter akhir     : ";
             cin >> meterAkhir;
             if (cin.fail()) {
+                if (cin.eof()) {
+                    cout << "\nInput berakhir. Program dihentikan.\n";
+                    return 0;
+                }
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 meterAkhir = -1;
@@ -56,6 +70,16 @@ int main() {
         do {
             cout << "Terlambat bayar? (y/t): ";
             cin >> terlambat;
+            if (cin.fail()) {
+                if (cin.eof()) {
+                    cout << "\nInput berakhir. Program dihentikan.\n";
+                    return 0;
+                }
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "  [!] Masukkan y atau t.\n";
+                continue;
+            }
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             if (terlambat != 'y' && terlambat != 'Y' && terlambat != 't' && terlambat != 'T')
                 cout << "  [!] Masukkan y atau t.\n";
@@ -100,6 +124,16 @@ int main() {
         do {
             cout << "\nProses pelanggan lain? (y/t): ";
             cin >> lanjut;
+            if (cin.fail()) {
+                if (cin.eof()) {
+                    cout << "\nInput berakhir. Program dihentikan.\n";
+                    return 0;
+                }
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "  [!] Masukkan y atau t.\n";
+                continue;
+            }
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             if (lanjut != 'y' && lanjut != 'Y' && lanjut != 't' && lanjut != 'T')
                 cout << "  [!] Masukkan y atau t.\n";
