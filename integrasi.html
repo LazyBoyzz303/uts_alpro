@@ -105,21 +105,21 @@ flowchart TD
 <h2>Tabel pengujian</h2>
 <div class="table-wrap"><table>
 <tr><th>No.</th><th>Skenario</th><th>Data masukan</th><th>Hasil yang diharapkan</th><th>Hasil aktual</th><th>Status</th></tr>
-<tr><td>1</td><td>Input normal</td><td>100 &rarr; 105, t</td><td>5 m³; total Rp20.000</td><td>...</td><td>...</td></tr>
-<tr><td>2</td><td>Nilai nol</td><td>50 &rarr; 50, t</td><td>0 m³; total Rp7.500</td><td>...</td><td>...</td></tr>
-<tr><td>3</td><td>Batas tingkat 1</td><td>0 &rarr; 10, t</td><td>Total Rp32.500</td><td>...</td><td>...</td></tr>
-<tr><td>4</td><td>Awal tingkat 2</td><td>0 &rarr; 11, t</td><td>Total Rp36.500</td><td>...</td><td>...</td></tr>
-<tr><td>5</td><td>Batas tingkat 2</td><td>0 &rarr; 20, t</td><td>Total Rp72.500</td><td>...</td><td>...</td></tr>
-<tr><td>6</td><td>Awal tingkat 3</td><td>0 &rarr; 21, t</td><td>Total Rp78.500</td><td>...</td><td>...</td></tr>
-<tr><td>7</td><td>Progresif + terlambat</td><td>0 &rarr; 25, y</td><td>Denda Rp4.750; total Rp107.250</td><td>...</td><td>...</td></tr>
-<tr><td>8</td><td>Terlambat tingkat 2</td><td>10 &rarr; 25, y</td><td>Denda Rp2.250; total Rp54.750</td><td>...</td><td>...</td></tr>
-<tr><td>9</td><td>Meter akhir &lt; awal</td><td>100 &rarr; 90</td><td>Ditolak, minta input ulang</td><td>...</td><td>...</td></tr>
-<tr><td>10</td><td>Meter negatif</td><td>-5</td><td>Ditolak, minta input ulang</td><td>...</td><td>...</td></tr>
-<tr><td>11</td><td>Input huruf</td><td>"abc"</td><td>Ditolak, program tidak berhenti</td><td>...</td><td>...</td></tr>
+<tr><td>1</td><td>Input normal</td><td>P001; Ani Wijaya; 100 &rarr; 105; t</td><td>Pemakaian 5 m³; total Rp20.000</td><td>Pemakaian 5 m³; denda Rp0; total Rp20.000</td><td>Sesuai</td></tr>
+<tr><td>2</td><td>Nilai nol</td><td>P002; Budi Santoso; 50 &rarr; 50; t</td><td>Pemakaian 0 m³; total Rp7.500; nama pelanggan tertinggi tercatat</td><td>Pemakaian 0 m³; total Rp7.500; pemakaian tertinggi 0 m³ (-)</td><td>Perlu perbaikan: nama tidak tercatat</td></tr>
+<tr><td>3</td><td>Batas tingkat 1</td><td>P003; Citra Lestari; 0 &rarr; 10; t</td><td>Pemakaian 10 m³; total Rp32.500</td><td>Pemakaian 10 m³; total Rp32.500</td><td>Sesuai</td></tr>
+<tr><td>4</td><td>Awal tingkat 2</td><td>P004; Dewi Rahma; 0 &rarr; 11; t</td><td>Pemakaian 11 m³; total Rp36.500</td><td>Pemakaian 11 m³; total Rp36.500</td><td>Sesuai</td></tr>
+<tr><td>5</td><td>Batas tingkat 2</td><td>P005; Eko Prasetyo; 0 &rarr; 20; t</td><td>Pemakaian 20 m³; total Rp72.500</td><td>Pemakaian 20 m³; total Rp72.500</td><td>Sesuai</td></tr>
+<tr><td>6</td><td>Awal tingkat 3</td><td>P006; Fitri Handayani; 0 &rarr; 21; t</td><td>Pemakaian 21 m³; total Rp78.500</td><td>Pemakaian 21 m³; total Rp78.500</td><td>Sesuai</td></tr>
+<tr><td>7</td><td>Progresif + terlambat</td><td>P007; Gita Pratama; 0 &rarr; 25; y</td><td>Biaya Rp95.000; denda Rp4.750; total Rp107.250</td><td>Biaya Rp95.000; denda Rp4.750; total Rp107.250</td><td>Sesuai</td></tr>
+<tr><td>8</td><td>Terlambat tingkat 2</td><td>P008; Hadi Kurniawan; 10 &rarr; 25; y</td><td>Pemakaian 15 m³; denda Rp2.250; total Rp54.750</td><td>Pemakaian 15 m³; denda Rp2.250; total Rp54.750</td><td>Sesuai</td></tr>
+<tr><td>9</td><td>Meter akhir &lt; awal</td><td>P009; Indah Permata; awal 100; akhir 90 ditolak, lalu 110; t</td><td>90 ditolak; 110 diterima; total Rp32.500</td><td>90 ditolak; 110 diterima; pemakaian 10 m³; total Rp32.500</td><td>Sesuai</td></tr>
+<tr><td>10</td><td>Meter negatif</td><td>P010; Joko Susilo; awal -5 ditolak, lalu 0; akhir 8; t</td><td>-5 ditolak; 0 diterima; total Rp27.500</td><td>-5 ditolak; 0 diterima; pemakaian 8 m³; total Rp27.500</td><td>Sesuai</td></tr>
+<tr><td>11</td><td>Input huruf</td><td>P011; Kartika Sari; awal "abc" ditolak, lalu 20; akhir 22; t</td><td>"abc" ditolak; input valid diterima; total Rp12.500</td><td>"abc" ditolak; 20 diterima; pemakaian 2 m³; total Rp12.500</td><td>Sesuai</td></tr>
 </table></div>
 
 <h2>Trace table percabangan</h2>
-<p>Data: pemakaian = 25, terlambat = y.</p>
+<p>Data sesuai Uji 7: P007 (Gita Pratama), pemakaian 25 m³, terlambat = y.</p>
 <div class="table-wrap"><table>
 <tr><th>Langkah</th><th>Kondisi</th><th>Hasil</th><th>Aksi</th><th>Nilai</th></tr>
 <tr><td>1</td><td>25 &le; 10</td><td>Salah</td><td>lanjut</td><td>-</td></tr>
@@ -133,15 +133,13 @@ flowchart TD
 </table></div>
 
 <h2>Trace table perulangan</h2>
-<p>Data: A = 5 m³ tepat waktu, B = 25 m³ terlambat, C = 15 m³ tepat waktu.</p>
+<p>Data sesuai Uji 7 pada screenshot: satu pelanggan, P007 (Gita Pratama), pemakaian 25 m³ dan terlambat. Setiap screenshot pengujian merupakan proses tersendiri.</p>
 <div class="table-wrap"><table>
-<tr><th>Iterasi</th><th>pemakaian</th><th>jumlahPelanggan</th><th>totalPemakaian</th><th>pemakaianTertinggi</th><th>jumlahTerlambat</th><th>jumlahDiAtas20</th><th>totalDenda</th><th>totalPendapatan</th><th>lanjut</th></tr>
-<tr><td>Awal</td><td>-</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>y</td></tr>
-<tr><td>1 (A)</td><td>5</td><td>1</td><td>5</td><td>5</td><td>0</td><td>0</td><td>0</td><td>20.000</td><td>y</td></tr>
-<tr><td>2 (B)</td><td>25</td><td>2</td><td>30</td><td>25</td><td>1</td><td>1</td><td>4.750</td><td>127.250</td><td>y</td></tr>
-<tr><td>3 (C)</td><td>15</td><td>3</td><td>45</td><td>25</td><td>1</td><td>1</td><td>4.750</td><td>179.750</td><td>t</td></tr>
+<tr><th>Iterasi</th><th>pemakaian</th><th>jumlahPelanggan</th><th>totalPemakaian</th><th>pemakaianTertinggi</th><th>jumlahTerlambat</th><th>jumlahDiAtas20</th><th>totalAdmin</th><th>totalDenda</th><th>totalPendapatan</th><th>lanjut</th></tr>
+<tr><td>Awal</td><td>-</td><td>0</td><td>0</td><td>0 (-)</td><td>0</td><td>0</td><td>Rp0</td><td>Rp0</td><td>Rp0</td><td>y</td></tr>
+<tr><td>1 (P007)</td><td>25</td><td>1</td><td>25</td><td>25 (Gita Pratama)</td><td>1</td><td>1</td><td>Rp7.500</td><td>Rp4.750</td><td>Rp107.250</td><td>t</td></tr>
 </table></div>
-<p>Rekap akhir: rata-rata 45 / 3 = 15,00 m³; total administrasi Rp22.500; pemakaian tertinggi 25 m³ (B).</p>
+<p>Rekap akhir sesuai screenshot Uji 7: rata-rata 25,00 m³; total administrasi Rp7.500; total denda Rp4.750; total pendapatan Rp107.250; pemakaian tertinggi 25 m³ (Gita Pratama).</p>
 
 <h2>Daftar kesalahan dan perbaikan</h2>
 <div class="table-wrap"><table>
