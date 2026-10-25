@@ -138,3 +138,9 @@ footer {
   body { background: #fff; color: #000; }
   pre { white-space: pre-wrap; border: 1px solid #999; background: #f4f4f4; color: #000; }
 }
+
+/* ---------- Daftar halaman di beranda ---------- */
+.pages { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; margin: 16px 0; }
+.pages a { display: block; text-decoration: none; color: var(--text); background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 14px 16px; font: 14px/1.5 system-ui, sans-serif; }
+.pages a:hover, .pages a:focus-visible { border-color: var(--accent); }
+.pages strong { display: block; color: var(--accent); font-size: 15px; }

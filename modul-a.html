@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Modul A | Tagihan Air Rumah Tangga</title>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<header class="top"><nav><a href="index.html">Beranda</a><a href="analisis.html">Analisis Masalah</a><a href="modul-a.html" class="active" aria-current="page">Modul A</a><a href="modul-b.html">Modul B</a><a href="integrasi.html">Program Terintegrasi</a><a href="flowchart.html">Flowchart</a><a href="refleksi.html">Refleksi</a><a href="pernyataan-ai.html">Pernyataan AI</a></nav></header>
+<main>
+
+<h1>Modul A: Proses Utama</h1>
+<p><strong>Penanggung jawab:</strong> <span class="todo">[Nama Anggota 1]</span></p>
+<h2>Algoritma deskriptif</h2>
+<ol>
+<li>Mulai; terima nomor dan nama pelanggan.</li>
+<li>Terima meter awal; ulangi sampai berupa angka dan tidak negatif.</li>
+<li>Terima meter akhir; ulangi sampai berupa angka dan tidak lebih kecil dari meter awal.</li>
+<li>Terima status terlambat; ulangi sampai berisi y atau t.</li>
+<li>Hitung pemakaian = meter akhir - meter awal.</li>
+<li>Jika pemakaian &le; 10, seluruhnya ditarif Rp2.500.</li>
+<li>Jika 10 &lt; pemakaian &le; 20, 10 m³ pertama Rp2.500 dan sisanya Rp4.000.</li>
+<li>Jika pemakaian &gt; 20, 10 m³ pertama Rp2.500, 10 m³ berikutnya Rp4.000, sisanya Rp6.000.</li>
+<li>Jumlahkan menjadi biaya pemakaian.</li>
+<li>Jika terlambat, denda = 5% x biaya pemakaian; jika tidak, denda = 0.</li>
+<li>Total tagihan = biaya pemakaian + administrasi + denda; tampilkan rincian.</li>
+</ol>
+<h2>Pseudocode</h2>
+<pre>SELAMA lanjut = 'y' LAKUKAN
+   BACA nomorPelanggan, namaPelanggan
+   ULANGI BACA meterAwal SAMPAI angka DAN meterAwal &gt;= 0
+   ULANGI BACA meterAkhir SAMPAI angka DAN meterAkhir &gt;= meterAwal
+   ULANGI BACA terlambat SAMPAI terlambat IN {y,t}
+   pemakaian &larr; meterAkhir - meterAwal
+   JIKA pemakaian &lt;= BATAS_1 MAKA
+      biayaTingkat1 &larr; pemakaian x TARIF_1
+   LAIN JIKA pemakaian &lt;= BATAS_2 MAKA
+      biayaTingkat1 &larr; BATAS_1 x TARIF_1
+      biayaTingkat2 &larr; (pemakaian - BATAS_1) x TARIF_2
+   LAIN
+      biayaTingkat1 &larr; BATAS_1 x TARIF_1
+      biayaTingkat2 &larr; (BATAS_2 - BATAS_1) x TARIF_2
+      biayaTingkat3 &larr; (pemakaian - BATAS_2) x TARIF_3
+   biayaPemakaian &larr; biayaTingkat1 + biayaTingkat2 + biayaTingkat3
+   JIKA terlambat MAKA denda &larr; biayaPemakaian x PERSEN_DENDA / 100
+   LAIN denda &larr; 0
+   totalTagihan &larr; biayaPemakaian + BIAYA_ADMIN + denda
+   TAMPILKAN rincian tagihan
+AKHIR SELAMA</pre>
+<h2>Flowchart</h2>
+<pre class="mermaid">
+flowchart TD
+  A([Mulai]) --> B[/Input nomor, nama/]
+  B --> C[/Input meter awal/]
+  C --> D{Angka dan >= 0?}
+  D -- Tidak --> C
+  D -- Ya --> E[/Input meter akhir/]
+  E --> F{Angka dan >= meter awal?}
+  F -- Tidak --> E
+  F -- Ya --> G[/Input status terlambat/]
+  G --> H{y atau t?}
+  H -- Tidak --> G
+  H -- Ya --> I[pemakaian = akhir - awal]
+  I --> J{pemakaian <= 10?}
+  J -- Ya --> K[tingkat1 = pemakaian x 2500]
+  J -- Tidak --> L{pemakaian <= 20?}
+  L -- Ya --> M[tingkat1 = 25000<br>tingkat2 = pemakaian-10 x 4000]
+  L -- Tidak --> N[tingkat1 = 25000, tingkat2 = 40000<br>tingkat3 = pemakaian-20 x 6000]
+  K --> O[biayaPemakaian = jumlah tingkat]
+  M --> O
+  N --> O
+  O --> P{Terlambat?}
+  P -- Ya --> Q[denda = 5% x biayaPemakaian]
+  P -- Tidak --> R[denda = 0]
+  Q --> S[total = biaya + admin + denda]
+  R --> S
+  S --> T[/Tampilkan rincian tagihan/]
+  T --> U([Ke Modul B])
+</pre>
+<h2>Source code dan penjelasan</h2>
+<pre data-src="src/modul_a.cpp">Memuat modul_a.cpp ...</pre>
+<p>Percabangan <code>if / else if / else</code> membuat tarif progresif, sehingga pemakaian 25 m³ dihitung per tingkat. Perulangan <code>do-while</code> menahan program sampai input valid, dan <code>cin.clear()</code> bersama <code>cin.ignore()</code> mencegah program macet saat pengguna mengetik huruf.</p>
+<h2>Hasil eksekusi dan pengujian</h2>
+<div class="shot"><span class="todo">[Tempel tangkapan layar hasil eksekusi Modul A: &lt;img src="gambar/modul_a.png" alt="Hasil Modul A"&gt;]</span></div>
+
+</main>
+<footer>Proyek UTS SSI1144 Algoritma dan Pengantar Pemrograman | Universitas Ma Chung</footer>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script>if(window.mermaid){mermaid.initialize({startOnLoad:true,theme:"default"});}</script>
+<script>
+document.querySelectorAll("pre[data-src]").forEach(function(el){
+  var f=el.getAttribute("data-src");
+  fetch(f).then(function(r){if(!r.ok)throw new Error(r.status);return r.text();})
+  .then(function(t){el.textContent=t;})
+  .catch(function(){el.textContent="Gagal memuat "+f+". Pastikan file ada di folder src/.";});
+});
+</script>
+</body>
+</html>

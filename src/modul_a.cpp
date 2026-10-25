@@ -105,5 +105,7 @@ int main() {
                 cout << "  [!] Masukkan y atau t.\n";
         } while (lanjut != 'y' && lanjut != 'Y' && lanjut != 't' && lanjut != 'T');
     }
+
+    cout << "\nProses Modul A selesai.\n";
     return 0;
 }

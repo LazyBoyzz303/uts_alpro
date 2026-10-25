@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Modul B | Tagihan Air Rumah Tangga</title>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<header class="top"><nav><a href="index.html">Beranda</a><a href="analisis.html">Analisis Masalah</a><a href="modul-a.html">Modul A</a><a href="modul-b.html" class="active" aria-current="page">Modul B</a><a href="integrasi.html">Program Terintegrasi</a><a href="flowchart.html">Flowchart</a><a href="refleksi.html">Refleksi</a><a href="pernyataan-ai.html">Pernyataan AI</a></nav></header>
+<main>
+
+<h1>Modul B: Rekapitulasi</h1>
+<p><strong>Penanggung jawab:</strong> <span class="todo">Steve Nathanael Intan</span></p>
+<h2>Algoritma deskriptif</h2>
+<ol>
+<li>Siapkan seluruh penghitung dan total dengan nilai 0; pemakaianTertinggi = 0, pelangganTertinggi = "-".</li>
+<li>Untuk setiap pelanggan, tambahkan jumlahPelanggan; jika terlambat, tambahkan jumlahTerlambat.</li>
+<li>Tambahkan pemakaian ke totalPemakaian; jika pemakaian &gt; 20, tambahkan jumlahDiAtas20.</li>
+<li>Jika pemakaian &gt; pemakaianTertinggi, simpan pemakaian dan nama pelanggannya.</li>
+<li>Tambahkan administrasi, denda, dan total tagihan ke total masing-masing.</li>
+<li>Setelah perulangan selesai, hitung rata-rata jika jumlahPelanggan &gt; 0, lalu tampilkan rekapitulasi.</li>
+</ol>
+<h2>Pseudocode</h2>
+<pre>jumlahPelanggan &larr; jumlahPelanggan + 1
+JIKA terlambat MAKA jumlahTerlambat &larr; jumlahTerlambat + 1
+totalPemakaian &larr; totalPemakaian + pemakaian
+JIKA pemakaian &gt; 20 MAKA jumlahDiAtas20 &larr; jumlahDiAtas20 + 1
+JIKA pemakaian &gt; pemakaianTertinggi MAKA
+   pemakaianTertinggi &larr; pemakaian
+   pelangganTertinggi &larr; namaPelanggan
+totalAdmin &larr; totalAdmin + BIAYA_ADMIN
+totalDenda &larr; totalDenda + denda
+totalPendapatan &larr; totalPendapatan + totalTagihan
+...
+JIKA jumlahPelanggan &gt; 0 MAKA rataRata &larr; totalPemakaian / jumlahPelanggan
+TAMPILKAN rekapitulasi</pre>
+<h2>Flowchart</h2>
+<pre class="mermaid">
+flowchart TD
+  A([Dari Modul A]) --> B[jumlahPelanggan + 1]
+  B --> C{Terlambat?}
+  C -- Ya --> D[jumlahTerlambat + 1]
+  C -- Tidak --> E
+  D --> E[totalPemakaian += pemakaian]
+  E --> F{pemakaian > 20?}
+  F -- Ya --> G[jumlahDiAtas20 + 1]
+  F -- Tidak --> H
+  G --> H{pemakaian > tertinggi?}
+  H -- Ya --> I[simpan tertinggi dan nama]
+  H -- Tidak --> J
+  I --> J[totalAdmin, totalDenda, totalPendapatan += nilai]
+  J --> K([Selesai Modul B])
+</pre>
+<h2>Source code dan penjelasan</h2>
+<pre data-src="src/modul_b.cpp">Memuat modul_b.cpp ...</pre>
+<p>Agar bisa diuji sendiri, Modul B menerima pemakaian dan biaya pemakaian secara manual. Pada program final, nilai ini otomatis berasal dari Modul A. Pengecekan <code>jumlahPelanggan &gt; 0</code> mencegah pembagian dengan nol.</p>
+<h2>Hasil eksekusi dan pengujian</h2>
+<div class="shot"><span class="todo">[Tempel tangkapan layar hasil eksekusi Modul B]</span></div>
+
+</main>
+<footer>Proyek UTS SSI1144 Algoritma dan Pengantar Pemrograman | Universitas Ma Chung</footer>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script>if(window.mermaid){mermaid.initialize({startOnLoad:true,theme:"default"});}</script>
+<script>
+document.querySelectorAll("pre[data-src]").forEach(function(el){
+  var f=el.getAttribute("data-src");
+  fetch(f).then(function(r){if(!r.ok)throw new Error(r.status);return r.text();})
+  .then(function(t){el.textContent=t;})
+  .catch(function(){el.textContent="Gagal memuat "+f+". Pastikan file ada di folder src/.";});
+});
+</script>
+</body>
+</html>

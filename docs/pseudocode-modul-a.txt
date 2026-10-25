@@ -1,0 +1,21 @@
+SELAMA lanjut = 'y' LAKUKAN
+   BACA nomorPelanggan, namaPelanggan
+   ULANGI BACA meterAwal SAMPAI angka DAN meterAwal >= 0
+   ULANGI BACA meterAkhir SAMPAI angka DAN meterAkhir >= meterAwal
+   ULANGI BACA terlambat SAMPAI terlambat IN {y,t}
+   pemakaian ← meterAkhir - meterAwal
+   JIKA pemakaian <= BATAS_1 MAKA
+      biayaTingkat1 ← pemakaian x TARIF_1
+   LAIN JIKA pemakaian <= BATAS_2 MAKA
+      biayaTingkat1 ← BATAS_1 x TARIF_1
+      biayaTingkat2 ← (pemakaian - BATAS_1) x TARIF_2
+   LAIN
+      biayaTingkat1 ← BATAS_1 x TARIF_1
+      biayaTingkat2 ← (BATAS_2 - BATAS_1) x TARIF_2
+      biayaTingkat3 ← (pemakaian - BATAS_2) x TARIF_3
+   biayaPemakaian ← biayaTingkat1 + biayaTingkat2 + biayaTingkat3
+   JIKA terlambat MAKA denda ← biayaPemakaian x PERSEN_DENDA / 100
+   LAIN denda ← 0
+   totalTagihan ← biayaPemakaian + BIAYA_ADMIN + denda
+   TAMPILKAN rincian tagihan
+AKHIR SELAMA
