@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flowchart | Tagihan Air Rumah Tangga</title>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<header class="top"><nav><a href="index.html">Beranda</a><a href="analisis.html">Analisis Masalah</a><a href="modul-a.html">Modul A</a><a href="modul-b.html">Modul B</a><a href="integrasi.html">Program Terintegrasi</a><a href="flowchart.html" class="active" aria-current="page">Flowchart</a><a href="refleksi.html">Refleksi</a><a href="pernyataan-ai.html">Pernyataan AI</a></nav></header>
+<main>
+
+<h1>Flowchart</h1>
+<p>Flowchart disusun untuk Modul A, Modul B, dan program terintegrasi. Alurnya sama dengan pseudocode dan source code.</p>
+
+<h2>Keterangan simbol</h2>
+<div class="table-wrap"><table>
+<tr><th>Simbol</th><th>Arti</th></tr>
+<tr><td>Oval</td><td>Mulai / selesai</td></tr>
+<tr><td>Jajaran genjang</td><td>Input / output</td></tr>
+<tr><td>Persegi panjang</td><td>Proses atau perhitungan</td></tr>
+<tr><td>Belah ketupat</td><td>Keputusan (percabangan atau pengecekan validasi)</td></tr>
+<tr><td>Persegi panjang bergaris ganda</td><td>Modul yang dipanggil (Modul A / Modul B)</td></tr>
+</table></div>
+
+<h2>Flowchart Modul A: proses utama</h2>
+<pre class="mermaid">
+flowchart TD
+  A([Mulai]) --> B[/Input nomor, nama/]
+  B --> C[/Input meter awal/]
+  C --> D{Angka dan >= 0?}
+  D -- Tidak --> C
+  D -- Ya --> E[/Input meter akhir/]
+  E --> F{Angka dan >= meter awal?}
+  F -- Tidak --> E
+  F -- Ya --> G[/Input status terlambat/]
+  G --> H{y atau t?}
+  H -- Tidak --> G
+  H -- Ya --> I[pemakaian = akhir - awal]
+  I --> J{pemakaian <= 10?}
+  J -- Ya --> K[tingkat1 = pemakaian x 2500]
+  J -- Tidak --> L{pemakaian <= 20?}
+  L -- Ya --> M[tingkat1 = 25000<br>tingkat2 = pemakaian-10 x 4000]
+  L -- Tidak --> N[tingkat1 = 25000, tingkat2 = 40000<br>tingkat3 = pemakaian-20 x 6000]
+  K --> O[biayaPemakaian = jumlah tingkat]
+  M --> O
+  N --> O
+  O --> P{Terlambat?}
+  P -- Ya --> Q[denda = 5% x biayaPemakaian]
+  P -- Tidak --> R[denda = 0]
+  Q --> S[total = biaya + admin + denda]
+  R --> S
+  S --> T[/Tampilkan rincian tagihan/]
+  T --> U([Ke Modul B])
+</pre>
+
+<h2>Flowchart Modul B: rekapitulasi</h2>
+<pre class="mermaid">
+flowchart TD
+  A([Dari Modul A]) --> B[jumlahPelanggan + 1]
+  B --> C{Terlambat?}
+  C -- Ya --> D[jumlahTerlambat + 1]
+  C -- Tidak --> E
+  D --> E[totalPemakaian += pemakaian]
+  E --> F{pemakaian > 20?}
+  F -- Ya --> G[jumlahDiAtas20 + 1]
+  F -- Tidak --> H
+  G --> H{pemakaian > tertinggi?}
+  H -- Ya --> I[simpan tertinggi dan nama]
+  H -- Tidak --> J
+  I --> J[totalAdmin, totalDenda, totalPendapatan += nilai]
+  J --> K([Selesai Modul B])
+</pre>
+
+<h2>Flowchart program terintegrasi</h2>
+<pre class="mermaid">
+flowchart TD
+  A([Mulai]) --> B[Inisialisasi total = 0]
+  B --> C[[Modul A: hitung tagihan]]
+  C --> D[[Modul B: update rekap]]
+  D --> E[/Input lanjut y/t/]
+  E --> V{y atau t?}
+  V -- Tidak --> E
+  V -- Ya --> F{lanjut = y?}
+  F -- Ya --> C
+  F -- Tidak --> G[Hitung rata-rata]
+  G --> H[/Tampilkan rekapitulasi/]
+  H --> I([Selesai])
+</pre>
+
+</main>
+<footer>Proyek UTS SSI1144 Algoritma dan Pengantar Pemrograman | Universitas Ma Chung</footer>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script>if(window.mermaid){mermaid.initialize({startOnLoad:true,theme:"default"});}</script>
+
+</body>
+</html>
