@@ -1,0 +1,140 @@
+/* ============================================================
+   style.css - Gaya bersama untuk seluruh halaman GitHub Pages
+   Proyek UTS SSI1144 | Studi Kasus 05 Tagihan Air Rumah Tangga
+   ============================================================ */
+
+/* ---------- Warna (terang dan gelap otomatis) ---------- */
+:root {
+  --bg: #f6fafb;
+  --surface: #ffffff;
+  --text: #16262c;
+  --muted: #4f6670;
+  --line: #d3e1e6;
+  --accent: #0b6f8a;
+  --accent-soft: #e1f1f5;
+  --code-bg: #102a33;
+  --code-text: #e4f2f6;
+  --warn-bg: #fff3c4;
+  --warn-text: #5c4400;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0e1a1f;
+    --surface: #15252c;
+    --text: #e4eef1;
+    --muted: #9fb5bd;
+    --line: #26404a;
+    --accent: #5fc3de;
+    --accent-soft: #183540;
+    --code-bg: #0a1418;
+    --code-text: #d6eaf0;
+  }
+}
+
+/* ---------- Dasar ---------- */
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 70px; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.65 Georgia, "Times New Roman", serif;
+}
+main { max-width: 1000px; margin: auto; padding: 32px 16px 80px; }
+p, li { max-width: 75ch; }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+code { font-family: ui-monospace, Consolas, monospace; font-size: .9em; }
+.back { font: 14px system-ui, sans-serif; }
+
+/* ---------- Judul ---------- */
+h1 { font-size: clamp(2rem, 6vw, 3.2rem); line-height: 1.12; margin: 16px 0 24px; }
+main > h1 { padding-bottom: 12px; border-bottom: 3px solid var(--accent); }
+h2 {
+  font-size: 1.6rem;
+  margin: 40px 0 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+}
+h3 { font-size: 1.2rem; margin: 32px 0 8px; }
+h4 { font: 600 1rem system-ui, sans-serif; margin: 20px 0 6px; }
+section { padding-top: 48px; }
+section > h2:first-child { margin-top: 0; }
+
+/* ---------- Navigasi atas ---------- */
+header.top {
+  position: sticky; top: 0; z-index: 5;
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+}
+nav {
+  display: flex; gap: 4px; overflow-x: auto;
+  padding: 8px 16px; max-width: 1000px; margin: auto;
+  font: 14px system-ui, sans-serif;
+}
+nav a {
+  white-space: nowrap; padding: 6px 12px; border-radius: 6px;
+  color: var(--muted); text-decoration: none;
+}
+nav a:hover, nav a:focus-visible { background: var(--accent-soft); color: var(--accent); outline: none; }
+nav a.active { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+
+/* ---------- Beranda ---------- */
+.hero { padding: 40px 0 32px; border-bottom: 3px solid var(--accent); }
+.hero p.course { font: 14px system-ui, sans-serif; color: var(--muted); margin: 0 0 8px; }
+.hero h1 { margin: 0 0 12px; padding: 0; border: 0; }
+.hero .case { font-size: 1.2rem; color: var(--accent); margin: 0 0 24px; }
+
+/* ---------- Tabel ---------- */
+.table-wrap { overflow-x: auto; margin: 12px 0; }
+table {
+  border-collapse: collapse; width: 100%;
+  font: 14px/1.5 system-ui, sans-serif;
+  background: var(--surface);
+}
+th, td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+th { background: var(--accent-soft); color: var(--text); }
+tbody tr:nth-child(even) td { background: color-mix(in srgb, var(--accent-soft) 35%, var(--surface)); }
+.meta { width: auto; min-width: min(100%, 520px); }
+
+/* ---------- Kode dan flowchart ---------- */
+pre {
+  background: var(--code-bg); color: var(--code-text);
+  padding: 16px; border-radius: 6px; overflow-x: auto;
+  font: 13px/1.55 ui-monospace, Consolas, monospace; margin: 12px 0;
+}
+.mermaid {
+  background: #ffffff; color: #16262c;
+  border: 1px solid var(--line); border-radius: 6px;
+  padding: 16px; overflow-x: auto; text-align: center;
+}
+
+/* ---------- Komponen ---------- */
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 16px 20px; margin: 12px 0; }
+.note {
+  background: var(--accent-soft); border-left: 4px solid var(--accent);
+  padding: 12px 16px; border-radius: 0 6px 6px 0; margin: 16px 0;
+}
+.shot {
+  border: 2px dashed var(--line); border-radius: 6px; padding: 20px;
+  color: var(--muted); font: 14px system-ui, sans-serif; text-align: center;
+}
+img { max-width: 100%; height: auto; border-radius: 6px; }
+.todo { background: var(--warn-bg); color: var(--warn-text); padding: 0 4px; border-radius: 3px; }
+
+/* ---------- Footer ---------- */
+footer {
+  border-top: 1px solid var(--line); padding: 24px 16px;
+  text-align: center; color: var(--muted); font: 14px system-ui, sans-serif;
+}
+
+/* ---------- Layar kecil dan cetak ---------- */
+@media (max-width: 600px) {
+  body { font-size: 15px; }
+  th, td { padding: 6px 8px; }
+}
+@media print {
+  header.top { display: none; }
+  body { background: #fff; color: #000; }
+  pre { white-space: pre-wrap; border: 1px solid #999; background: #f4f4f4; color: #000; }
+}
