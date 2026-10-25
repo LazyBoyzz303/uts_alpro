@@ -12,8 +12,7 @@ Program C++ untuk menghitung tagihan air pelanggan dengan tarif progresif, biaya
 
 | Nama | NIM | Modul |
 |------|-----|-------|
-| [Nama Anggota 1] | [NIM] | Modul A |
-| [Nama Anggota 2] | [NIM] | Modul B |
+| Steve Nathanael Intan | 322610012 | Modul A dan B|
 
 ## Struktur Repository
 
@@ -59,7 +58,7 @@ g++ -o program_final src/program_final.cpp -std=c++17
 
 ## GitHub Pages
 
-> URL: `https://<username>.github.io/<repo>/`
+> URL: `https://github.com/LazyBoyzz303/uts_alpro`
 
 ## Ketentuan Tarif
 
