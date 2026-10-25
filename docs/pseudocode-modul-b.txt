@@ -1,0 +1,13 @@
+jumlahPelanggan ← jumlahPelanggan + 1
+JIKA terlambat MAKA jumlahTerlambat ← jumlahTerlambat + 1
+totalPemakaian ← totalPemakaian + pemakaian
+JIKA pemakaian > 20 MAKA jumlahDiAtas20 ← jumlahDiAtas20 + 1
+JIKA pemakaian > pemakaianTertinggi MAKA
+   pemakaianTertinggi ← pemakaian
+   pelangganTertinggi ← namaPelanggan
+totalAdmin ← totalAdmin + BIAYA_ADMIN
+totalDenda ← totalDenda + denda
+totalPendapatan ← totalPendapatan + totalTagihan
+...
+JIKA jumlahPelanggan > 0 MAKA rataRata ← totalPemakaian / jumlahPelanggan
+TAMPILKAN rekapitulasi

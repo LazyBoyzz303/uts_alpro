@@ -1,0 +1,143 @@
+// ============================================================
+// PROGRAM TERINTEGRASI - Sistem Perhitungan Tagihan Air
+// Rumah Tangga (Studi Kasus 05)
+// Gabungan Modul A (proses utama) dan Modul B (rekapitulasi).
+// ============================================================
+#include <iostream>
+#include <string>
+#include <iomanip>
+#include <limits>
+using namespace std;
+
+int main() {
+    // Konstanta tarif dan biaya
+    const int TARIF_1 = 2500, TARIF_2 = 4000, TARIF_3 = 6000;
+    const int BATAS_1 = 10, BATAS_2 = 20;
+    const int BIAYA_ADMIN = 7500;
+    const int PERSEN_DENDA = 5;
+
+    // Variabel rekapitulasi (Modul B)
+    int jumlahPelanggan = 0, jumlahTerlambat = 0, jumlahDiAtas20 = 0;
+    int totalPemakaian = 0, pemakaianTertinggi = 0;
+    int totalAdmin = 0, totalDenda = 0, totalPendapatan = 0;
+    string pelangganTertinggi = "-";
+    double rataRata = 0;
+
+    char lanjut = 'y';
+
+    while (lanjut == 'y' || lanjut == 'Y') {
+        string nomorPelanggan, namaPelanggan;
+        int meterAwal, meterAkhir;
+        char terlambat;
+
+        // ================= MODUL A: PROSES UTAMA =================
+        cout << "\n=== Data Pelanggan Baru ===\n";
+        cout << "Nomor pelanggan : ";
+        getline(cin, nomorPelanggan);
+        cout << "Nama pelanggan  : ";
+        getline(cin, namaPelanggan);
+
+        do {
+            cout << "Meter awal      : ";
+            cin >> meterAwal;
+            if (cin.fail()) {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                meterAwal = -1;
+            }
+            if (meterAwal < 0) cout << "  [!] Meter awal tidak valid (harus angka >= 0).\n";
+        } while (meterAwal < 0);
+
+        do {
+            cout << "Meter akhir     : ";
+            cin >> meterAkhir;
+            if (cin.fail()) {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                meterAkhir = -1;
+            }
+            if (meterAkhir < meterAwal)
+                cout << "  [!] Meter akhir tidak valid (tidak boleh lebih kecil dari meter awal).\n";
+        } while (meterAkhir < meterAwal);
+
+        do {
+            cout << "Terlambat bayar? (y/t): ";
+            cin >> terlambat;
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            if (terlambat != 'y' && terlambat != 'Y' && terlambat != 't' && terlambat != 'T')
+                cout << "  [!] Masukkan y atau t.\n";
+        } while (terlambat != 'y' && terlambat != 'Y' && terlambat != 't' && terlambat != 'T');
+
+        bool statusTerlambat = (terlambat == 'y' || terlambat == 'Y');
+
+        int pemakaian = meterAkhir - meterAwal;
+        int biayaTingkat1 = 0, biayaTingkat2 = 0, biayaTingkat3 = 0;
+
+        if (pemakaian <= BATAS_1) {
+            biayaTingkat1 = pemakaian * TARIF_1;
+        } else if (pemakaian <= BATAS_2) {
+            biayaTingkat1 = BATAS_1 * TARIF_1;
+            biayaTingkat2 = (pemakaian - BATAS_1) * TARIF_2;
+        } else {
+            biayaTingkat1 = BATAS_1 * TARIF_1;
+            biayaTingkat2 = (BATAS_2 - BATAS_1) * TARIF_2;
+            biayaTingkat3 = (pemakaian - BATAS_2) * TARIF_3;
+        }
+        int biayaPemakaian = biayaTingkat1 + biayaTingkat2 + biayaTingkat3;
+
+        int denda = 0;
+        if (statusTerlambat) denda = biayaPemakaian * PERSEN_DENDA / 100;
+
+        int totalTagihan = biayaPemakaian + BIAYA_ADMIN + denda;
+
+        cout << "\n--- Rincian Tagihan ---\n";
+        cout << "Pelanggan        : " << nomorPelanggan << " - " << namaPelanggan << "\n";
+        cout << "Meter            : " << meterAwal << " -> " << meterAkhir << "\n";
+        cout << "Pemakaian        : " << pemakaian << " m3\n";
+        cout << "Tingkat 1 (0-10) : Rp" << biayaTingkat1 << "\n";
+        cout << "Tingkat 2 (11-20): Rp" << biayaTingkat2 << "\n";
+        cout << "Tingkat 3 (>20)  : Rp" << biayaTingkat3 << "\n";
+        cout << "Biaya pemakaian  : Rp" << biayaPemakaian << "\n";
+        cout << "Administrasi     : Rp" << BIAYA_ADMIN << "\n";
+        cout << "Denda            : Rp" << denda << "\n";
+        cout << "TOTAL TAGIHAN    : Rp" << totalTagihan << "\n";
+
+        // ================= MODUL B: REKAPITULASI =================
+        jumlahPelanggan++;
+        if (statusTerlambat) jumlahTerlambat++;
+        totalPemakaian += pemakaian;
+        if (pemakaian > BATAS_2) jumlahDiAtas20++;
+        if (pemakaian > pemakaianTertinggi) {
+            pemakaianTertinggi = pemakaian;
+            pelangganTertinggi = namaPelanggan;
+        }
+        totalAdmin += BIAYA_ADMIN;
+        totalDenda += denda;
+        totalPendapatan += totalTagihan;
+
+        // ================= INTEGRASI: ULANGI / AKHIRI =================
+        do {
+            cout << "\nProses pelanggan lain? (y/t): ";
+            cin >> lanjut;
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            if (lanjut != 'y' && lanjut != 'Y' && lanjut != 't' && lanjut != 'T')
+                cout << "  [!] Masukkan y atau t.\n";
+        } while (lanjut != 'y' && lanjut != 'Y' && lanjut != 't' && lanjut != 'T');
+    }
+
+    if (jumlahPelanggan > 0) rataRata = (double)totalPemakaian / jumlahPelanggan;
+
+    cout << "\n========== REKAPITULASI ==========\n";
+    cout << "Jumlah pelanggan           : " << jumlahPelanggan << "\n";
+    cout << "Pelanggan terlambat        : " << jumlahTerlambat << "\n";
+    cout << "Total pemakaian            : " << totalPemakaian << " m3\n";
+    cout << fixed << setprecision(2);
+    cout << "Rata-rata pemakaian        : " << rataRata << " m3\n";
+    cout << "Pelanggan pemakaian > 20 m3: " << jumlahDiAtas20 << "\n";
+    cout << "Total administrasi         : Rp" << totalAdmin << "\n";
+    cout << "Total denda                : Rp" << totalDenda << "\n";
+    cout << "Total pendapatan           : Rp" << totalPendapatan << "\n";
+    cout << "Pemakaian tertinggi        : " << pemakaianTertinggi
+         << " m3 (" << pelangganTertinggi << ")\n";
+    return 0;
+}
