@@ -107,7 +107,7 @@ int main() {
         if (statusTerlambat) jumlahTerlambat++;
         totalPemakaian += pemakaian;
         if (pemakaian > BATAS_2) jumlahDiAtas20++;
-        if (pemakaian > pemakaianTertinggi) {
+        if (jumlahPelanggan == 1 || pemakaian > pemakaianTertinggi) {
             pemakaianTertinggi = pemakaian;
             pelangganTertinggi = namaPelanggan;
         }

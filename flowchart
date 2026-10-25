@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flowchart | Tagihan Air Rumah Tangga</title>
+<style>
+:root{--bg:#f6fafb;--surface:#fff;--text:#16262c;--muted:#4f6670;--line:#d3e1e6;--accent:#0b6f8a;--accent-soft:#e1f1f5;--code-bg:#102a33;--code-text:#e4f2f6}
+@media (prefers-color-scheme:dark){:root{--bg:#0e1a1f;--surface:#15252c;--text:#e4eef1;--muted:#9fb5bd;--line:#26404a;--accent:#5fc3de;--accent-soft:#183540;--code-bg:#0a1418;--code-text:#d6eaf0}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.65 Georgia,"Times New Roman",serif}
+main{max-width:1000px;margin:auto;padding:32px 16px 80px}
+.back{font:14px system-ui,sans-serif}
+h1{font-size:clamp(1.8rem,5vw,2.6rem);line-height:1.15;margin:16px 0 24px;padding-bottom:12px;border-bottom:3px solid var(--accent)}
+h2{font-size:1.4rem;margin:36px 0 8px}
+p,li{max-width:75ch}
+.table-wrap{overflow-x:auto;margin:12px 0}
+table{border-collapse:collapse;width:100%;font:14px/1.5 system-ui,sans-serif;background:var(--surface)}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--accent-soft)}
+pre{background:var(--code-bg);color:var(--code-text);padding:16px;border-radius:6px;overflow-x:auto;font:13px/1.55 ui-monospace,Consolas,monospace;margin:12px 0}
+code{font-family:ui-monospace,Consolas,monospace;font-size:.9em}
+.mermaid{background:#fff;border:1px solid var(--line);border-radius:6px;padding:16px;overflow-x:auto;text-align:center}
+.shot{border:2px dashed var(--line);border-radius:6px;padding:20px;color:var(--muted);font:14px system-ui,sans-serif;text-align:center}
+.todo{background:#fff3c4;color:#5c4400;padding:0 4px;border-radius:3px}
+.note{background:var(--accent-soft);border-left:4px solid var(--accent);padding:12px 16px;border-radius:0 6px 6px 0;margin:16px 0}
+a{color:var(--accent)}
+</style>
+</head>
+<body>
+<main>
+<a class="back" href="index.html">&larr; Kembali ke beranda</a>
+<h1>Flowchart</h1>
+<p>Flowchart disusun untuk Modul A, Modul B, dan program terintegrasi. Alurnya sama dengan pseudocode dan source code.</p>
+
+<h2>Keterangan simbol</h2>
+<div class="table-wrap"><table>
+<tr><th>Simbol</th><th>Arti</th></tr>
+<tr><td>Oval</td><td>Mulai / selesai</td></tr>
+<tr><td>Jajaran genjang</td><td>Input / output</td></tr>
+<tr><td>Persegi panjang</td><td>Proses atau perhitungan</td></tr>
+<tr><td>Belah ketupat</td><td>Keputusan (percabangan atau pengecekan validasi)</td></tr>
+<tr><td>Persegi panjang bergaris ganda</td><td>Modul yang dipanggil (Modul A / Modul B)</td></tr>
+</table></div>
+
+<h2>Flowchart Modul A: proses utama</h2>
+<pre class="mermaid">
+flowchart TD
+  A([Mulai]) --> B[/Input nomor, nama/]
+  B --> C[/Input meter awal/]
+  C --> D{Angka dan >= 0?}
+  D -- Tidak --> C
+  D -- Ya --> E[/Input meter akhir/]
+  E --> F{Angka dan >= meter awal?}
+  F -- Tidak --> E
+  F -- Ya --> G[/Input status terlambat/]
+  G --> H{y atau t?}
+  H -- Tidak --> G
+  H -- Ya --> I[pemakaian = akhir - awal]
+  I --> J{pemakaian <= 10?}
+  J -- Ya --> K[tingkat1 = pemakaian x 2500]
+  J -- Tidak --> L{pemakaian <= 20?}
+  L -- Ya --> M[tingkat1 = 25000<br>tingkat2 = pemakaian-10 x 4000]
+  L -- Tidak --> N[tingkat1 = 25000, tingkat2 = 40000<br>tingkat3 = pemakaian-20 x 6000]
+  K --> O[biayaPemakaian = jumlah tingkat]
+  M --> O
+  N --> O
+  O --> P{Terlambat?}
+  P -- Ya --> Q[denda = 5% x biayaPemakaian]
+  P -- Tidak --> R[denda = 0]
+  Q --> S[total = biaya + admin + denda]
+  R --> S
+  S --> T[/Tampilkan rincian tagihan/]
+  T --> U([Ke Modul B])
+</pre>
+
+<h2>Flowchart Modul B: rekapitulasi</h2>
+<pre class="mermaid">
+flowchart TD
+  A([Dari Modul A]) --> B[jumlahPelanggan + 1]
+  B --> C{Terlambat?}
+  C -- Ya --> D[jumlahTerlambat + 1]
+  C -- Tidak --> E
+  D --> E[totalPemakaian += pemakaian]
+  E --> F{pemakaian > 20?}
+  F -- Ya --> G[jumlahDiAtas20 + 1]
+  F -- Tidak --> H
+  G --> H{pemakaian > tertinggi?}
+  H -- Ya --> I[simpan tertinggi dan nama]
+  H -- Tidak --> J
+  I --> J[totalAdmin, totalDenda, totalPendapatan += nilai]
+  J --> K([Selesai Modul B])
+</pre>
+
+<h2>Flowchart program terintegrasi</h2>
+<pre class="mermaid">
+flowchart TD
+  A([Mulai]) --> B[Inisialisasi total = 0]
+  B --> C[[Modul A: hitung tagihan]]
+  C --> D[[Modul B: update rekap]]
+  D --> E[/Input lanjut y/t/]
+  E --> V{y atau t?}
+  V -- Tidak --> E
+  V -- Ya --> F{lanjut = y?}
+  F -- Ya --> C
+  F -- Tidak --> G[Hitung rata-rata]
+  G --> H[/Tampilkan rekapitulasi/]
+  H --> I([Selesai])
+</pre>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script>if(window.mermaid){mermaid.initialize({startOnLoad:true,theme:"default"});}</script>
+</body>
+</html>
