@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Program Terintegrasi | Tagihan Air Rumah Tangga</title>
+<style>
+:root{--bg:#f6fafb;--surface:#fff;--text:#16262c;--muted:#4f6670;--line:#d3e1e6;--accent:#0b6f8a;--accent-soft:#e1f1f5;--code-bg:#102a33;--code-text:#e4f2f6}
+@media (prefers-color-scheme:dark){:root{--bg:#0e1a1f;--surface:#15252c;--text:#e4eef1;--muted:#9fb5bd;--line:#26404a;--accent:#5fc3de;--accent-soft:#183540;--code-bg:#0a1418;--code-text:#d6eaf0}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.65 Georgia,"Times New Roman",serif}
+main{max-width:1000px;margin:auto;padding:32px 16px 80px}
+.back{font:14px system-ui,sans-serif}
+h1{font-size:clamp(1.8rem,5vw,2.6rem);line-height:1.15;margin:16px 0 24px;padding-bottom:12px;border-bottom:3px solid var(--accent)}
+h2{font-size:1.4rem;margin:36px 0 8px}
+p,li{max-width:75ch}
+.table-wrap{overflow-x:auto;margin:12px 0}
+table{border-collapse:collapse;width:100%;font:14px/1.5 system-ui,sans-serif;background:var(--surface)}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--accent-soft)}
+pre{background:var(--code-bg);color:var(--code-text);padding:16px;border-radius:6px;overflow-x:auto;font:13px/1.55 ui-monospace,Consolas,monospace;margin:12px 0}
+code{font-family:ui-monospace,Consolas,monospace;font-size:.9em}
+.mermaid{background:#fff;border:1px solid var(--line);border-radius:6px;padding:16px;overflow-x:auto;text-align:center}
+.shot{border:2px dashed var(--line);border-radius:6px;padding:20px;color:var(--muted);font:14px system-ui,sans-serif;text-align:center}
+.todo{background:#fff3c4;color:#5c4400;padding:0 4px;border-radius:3px}
+.note{background:var(--accent-soft);border-left:4px solid var(--accent);padding:12px 16px;border-radius:0 6px 6px 0;margin:16px 0}
+a{color:var(--accent)}
+</style>
+</head>
+<body>
+<main>
+<a class="back" href="index.html">&larr; Kembali ke beranda</a>
+<h1>Program Terintegrasi</h1>
+
+<h2>Proses integrasi</h2>
+<p>Kode Modul A dan Modul B digabung dalam satu perulangan <code>while</code>. Di setiap putaran, Modul A menghitung tagihan, lalu Modul B langsung memperbarui rekapitulasi dengan nilai yang sama. Setelah itu program menanyakan apakah petugas ingin lanjut; jika tidak, rekapitulasi ditampilkan.</p>
+<p>Langkah integrasi:</p>
+<ol>
+<li>Variabel rekapitulasi Modul B dipindahkan ke bagian awal <code>main()</code>, sebelum perulangan.</li>
+<li>Input dan perhitungan Modul A ditempatkan di dalam perulangan.</li>
+<li>Modul B tidak lagi meminta input manual; ia memakai <code>pemakaian</code>, <code>denda</code>, dan <code>totalTagihan</code> dari Modul A.</li>
+<li>Pilihan lanjut/berhenti ditambahkan di akhir perulangan, dengan validasi y/t.</li>
+<li>Rekapitulasi ditampilkan setelah perulangan selesai.</li>
+</ol>
+
+<h2>Pseudocode final</h2>
+<pre>MULAI
+  inisialisasi semua penghitung dan total = 0
+  pemakaianTertinggi &larr; 0; pelangganTertinggi &larr; "-"
+  lanjut &larr; 'y'
+  SELAMA lanjut = 'y' LAKUKAN
+     // Modul A
+     BACA nomorPelanggan, namaPelanggan
+     ULANGI BACA meterAwal SAMPAI angka DAN meterAwal &gt;= 0
+     ULANGI BACA meterAkhir SAMPAI angka DAN meterAkhir &gt;= meterAwal
+     ULANGI BACA terlambat SAMPAI terlambat IN {y,t}
+     pemakaian &larr; meterAkhir - meterAwal
+     hitung biayaTingkat1, biayaTingkat2, biayaTingkat3 (tarif progresif)
+     biayaPemakaian &larr; jumlah ketiga tingkat
+     denda &larr; (terlambat) ? biayaPemakaian x 5 / 100 : 0
+     totalTagihan &larr; biayaPemakaian + BIAYA_ADMIN + denda
+     TAMPILKAN rincian tagihan
+     // Modul B
+     perbarui jumlah, total, pemakaian tertinggi
+     // Integrasi
+     ULANGI BACA lanjut SAMPAI lanjut IN {y,t}
+  AKHIR SELAMA
+  JIKA jumlahPelanggan &gt; 0 MAKA rataRata &larr; totalPemakaian / jumlahPelanggan
+  TAMPILKAN rekapitulasi
+SELESAI</pre>
+
+<h2>Flowchart final</h2>
+<pre class="mermaid">
+flowchart TD
+  A([Mulai]) --> B[Inisialisasi total = 0]
+  B --> C[[Modul A: hitung tagihan]]
+  C --> D[[Modul B: update rekap]]
+  D --> E[/Input lanjut y/t/]
+  E --> V{y atau t?}
+  V -- Tidak --> E
+  V -- Ya --> F{lanjut = y?}
+  F -- Ya --> C
+  F -- Tidak --> G[Hitung rata-rata]
+  G --> H[/Tampilkan rekapitulasi/]
+  H --> I([Selesai])
+</pre>
+<p>Rincian flowchart Modul A dan Modul B ada di <a href="flowchart.html">halaman Flowchart</a>.</p>
+
+<h2>Source code final</h2>
+<pre data-src="program_final.cpp">Memuat program_final.cpp ...</pre>
+
+<h2>Hasil eksekusi</h2>
+<div class="shot"><span class="todo">[Tempel tangkapan layar program final: rincian tagihan dan rekapitulasi, misalnya &lt;img src="gambar/final.png" alt="Hasil program final"&gt;]</span></div>
+
+<h2>Tabel pengujian</h2>
+<div class="table-wrap"><table>
+<tr><th>No.</th><th>Skenario</th><th>Data masukan</th><th>Hasil yang diharapkan</th><th>Hasil aktual</th><th>Status</th></tr>
+<tr><td>1</td><td>Input normal</td><td>100 &rarr; 105, t</td><td>5 m³; total Rp20.000</td><td class="todo">...</td><td class="todo">...</td></tr>
+<tr><td>2</td><td>Nilai nol</td><td>50 &rarr; 50, t</td><td>0 m³; total Rp7.500</td><td class="todo">...</td><td class="todo">...</td></tr>
+<tr><td>3</td><td>Batas tingkat 1</td><td>0 &rarr; 10, t</td><td>Total Rp32.500</td><td class="todo">...</td><td class="todo">...</td></tr>
+<tr><td>4</td><td>Awal tingkat 2</td><td>0 &rarr; 11, t</td><td>Total Rp36.500</td><td class="todo">...</td><td class="todo">...</td></tr>
+<tr><td>5</td><td>Batas tingkat 2</td><td>0 &rarr; 20, t</td><td>Total Rp72.500</td><td class="todo">...</td><td class="todo">...</td></tr>
+<tr><td>6</td><td>Awal tingkat 3</td><td>0 &rarr; 21, t</td><td>Total Rp78.500</td><td class="todo">...</td><td class="todo">...</td></tr>
+<tr><td>7</td><td>Progresif + terlambat</td><td>0 &rarr; 25, y</td><td>Denda Rp4.750; total Rp107.250</td><td class="todo">...</td><td class="todo">...</td></tr>
+<tr><td>8</td><td>Terlambat tingkat 2</td><td>10 &rarr; 25, y</td><td>Denda Rp2.250; total Rp54.750</td><td class="todo">...</td><td class="todo">...</td></tr>
+<tr><td>9</td><td>Meter akhir &lt; awal</td><td>100 &rarr; 90</td><td>Ditolak, minta input ulang</td><td class="todo">...</td><td class="todo">...</td></tr>
+<tr><td>10</td><td>Meter negatif</td><td>-5</td><td>Ditolak, minta input ulang</td><td class="todo">...</td><td class="todo">...</td></tr>
+<tr><td>11</td><td>Input huruf</td><td>"abc"</td><td>Ditolak, program tidak berhenti</td><td class="todo">...</td><td class="todo">...</td></tr>
+</table></div>
+
+<h2>Trace table percabangan</h2>
+<p>Data: pemakaian = 25, terlambat = y.</p>
+<div class="table-wrap"><table>
+<tr><th>Langkah</th><th>Kondisi</th><th>Hasil</th><th>Aksi</th><th>Nilai</th></tr>
+<tr><td>1</td><td>25 &le; 10</td><td>Salah</td><td>lanjut</td><td>-</td></tr>
+<tr><td>2</td><td>25 &le; 20</td><td>Salah</td><td>masuk else</td><td>-</td></tr>
+<tr><td>3</td><td>-</td><td>-</td><td>biayaTingkat1 = 10 x 2500</td><td>25.000</td></tr>
+<tr><td>4</td><td>-</td><td>-</td><td>biayaTingkat2 = 10 x 4000</td><td>40.000</td></tr>
+<tr><td>5</td><td>-</td><td>-</td><td>biayaTingkat3 = 5 x 6000</td><td>30.000</td></tr>
+<tr><td>6</td><td>-</td><td>-</td><td>biayaPemakaian</td><td>95.000</td></tr>
+<tr><td>7</td><td>terlambat?</td><td>Benar</td><td>denda = 95.000 x 5/100</td><td>4.750</td></tr>
+<tr><td>8</td><td>-</td><td>-</td><td>totalTagihan = 95.000 + 7.500 + 4.750</td><td>107.250</td></tr>
+</table></div>
+
+<h2>Trace table perulangan</h2>
+<p>Data: A = 5 m³ tepat waktu, B = 25 m³ terlambat, C = 15 m³ tepat waktu.</p>
+<div class="table-wrap"><table>
+<tr><th>Iterasi</th><th>pemakaian</th><th>jumlahPelanggan</th><th>totalPemakaian</th><th>pemakaianTertinggi</th><th>jumlahTerlambat</th><th>jumlahDiAtas20</th><th>totalDenda</th><th>totalPendapatan</th><th>lanjut</th></tr>
+<tr><td>Awal</td><td>-</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>y</td></tr>
+<tr><td>1 (A)</td><td>5</td><td>1</td><td>5</td><td>5</td><td>0</td><td>0</td><td>0</td><td>20.000</td><td>y</td></tr>
+<tr><td>2 (B)</td><td>25</td><td>2</td><td>30</td><td>25</td><td>1</td><td>1</td><td>4.750</td><td>127.250</td><td>y</td></tr>
+<tr><td>3 (C)</td><td>15</td><td>3</td><td>45</td><td>25</td><td>1</td><td>1</td><td>4.750</td><td>179.750</td><td>t</td></tr>
+</table></div>
+<p>Rekap akhir: rata-rata 45 / 3 = 15,00 m³; total administrasi Rp22.500; pemakaian tertinggi 25 m³ (B).</p>
+
+<h2>Daftar kesalahan dan perbaikan</h2>
+<div class="table-wrap"><table>
+<tr><th>No.</th><th>Kesalahan</th><th>Perbaikan</th></tr>
+<tr><td>1</td><td>Tarif dikalikan ke seluruh pemakaian</td><td>Dihitung per tingkat dengan percabangan</td></tr>
+<tr><td>2</td><td>Program macet saat input huruf</td><td>Menambah <code>cin.clear()</code> dan <code>cin.ignore()</code></td></tr>
+<tr><td>3</td><td><code>getline</code> terlewat setelah <code>cin &gt;&gt;</code></td><td>Menambah <code>cin.ignore()</code></td></tr>
+<tr><td>4</td><td class="todo">[isi sesuai pengalaman kelompok]</td><td class="todo">[...]</td></tr>
+</table></div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script>if(window.mermaid){mermaid.initialize({startOnLoad:true,theme:"default"});}</script>
+<script>
+document.querySelectorAll("pre[data-src]").forEach(function(el){
+  var f=el.getAttribute("data-src");
+  fetch(f).then(function(r){if(!r.ok)throw new Error(r.status);return r.text();})
+  .then(function(t){el.textContent=t;})
+  .catch(function(){el.textContent="Gagal memuat "+f+". Pastikan file ada di folder yang sama dengan halaman ini.";});
+});
+</script>
+</body>
+</html>
